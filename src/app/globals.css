@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+/* Design system tokens — see .claude/skills/pm-dashboard-conventions/SKILL.md */
+:root {
+  --brand-magenta: #a00558;
+  --brand-red: #ef0b10;
+  --brand-orange: #f18029;
+  /* Babaylan logo: outline and fill run top to bottom from logo-red to logo-orange. */
+  --logo-red: #e90816;
+  --logo-orange: #ff8904;
+  /* Navy from the logo's "on dark" version (dark-mode cards), and the deeper page navy (dark-mode page, login background). */
+  --navy: #071f2b;
+  --navy-deep: #01131f;
+
+  --primary: #a00558;
+  --primary-foreground: #ffffff;
+  /* Text on a solid primary fill (white in light mode, dark in dark mode). */
+  --on-primary: #ffffff;
+  --secondary: #fce7f1;
+  --secondary-foreground: #a00558;
+  --accent: #fdf2f7;
+  --background: #f9fafb;
+  --surface: #ffffff;
+  --foreground: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --success: #15803d;
+  --warning: #b45309;
+  --danger: #b91c1c;
+  /* Orange highlight for headline numbers, section labels and progress (dashboard). */
+  --highlight: #c2410c;
+  --ink: #16060f;
+
+  /* Project identity colors (categorical). Validated for colorblind separation. */
+  --project-magenta: #a00558;
+  --project-blue: #2563eb;
+  --project-teal: #0d9488;
+  --project-amber: #d97706;
+  --project-violet: #6d28d9;
+  /* Text on each project color fill. */
+  --on-project-magenta: #ffffff;
+  --on-project-blue: #ffffff;
+  --on-project-teal: #16060f;
+  --on-project-amber: #16060f;
+  --on-project-violet: #ffffff;
+  /* Board square shading for the allocation "rooms". */
+  --board-dark: #f3eaef;
+
+  /* Risk score bands (heat map cells and score badges). */
+  --risk-low: #dcf1e2;
+  --risk-low-fg: #166534;
+  --risk-medium: #fcebd4;
+  --risk-medium-fg: #92400e;
+  --risk-high: #f9d3b8;
+  --risk-high-fg: #9a3412;
+  --risk-critical: #f4c2c2;
+  --risk-critical-fg: #991b1b;
+  /* Gantt bar track (remaining work) and phase track. */
+  --gantt-track: #bfd3fb;
+  --gantt-phase-track: #d9cdd3;
+  /* Extra line colors for the expense trend chart (after the 5 project colors). */
+  --chart-6: #0891b2;
+  --chart-7: #4d7c0f;
+  --chart-8: #c2410c;
+  --chart-9: #475569;
+  --chart-10: #92400e;
+}
+
+/* Dark theme: page #01131F and cards/sidebar #071F2B (the navy from the logo's "on dark" version). Set by data-theme on <html>
+   (see src/components/layout/theme-script.tsx). Every value is checked for readable contrast;
+   the project colors are a lighter set validated for colorblind separation on the dark surface. */
+/* Screen only: printed reports and PDFs always use the light colors. */
+@media screen {
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --primary: #ec5b9f;
+    --on-primary: #16060f;
+    --secondary: #3a1229;
+    --secondary-foreground: #f9a8d0;
+    --accent: #0e2b3a;
+    --background: #01131f;
+    --surface: #071f2b;
+    --foreground: #e6edf1;
+    --muted: #93a7b2;
+    --border: #1a3746;
+    --success: #4ade80;
+    --warning: #fbbf24;
+    --danger: #f06060;
+    --highlight: #ff8904;
+
+    --project-magenta: #e45ca1;
+    --project-blue: #5789ec;
+    --project-teal: #12a594;
+    --project-amber: #c47f10;
+    --project-violet: #9479ec;
+    --on-project-magenta: #16060f;
+    --on-project-blue: #16060f;
+    --on-project-teal: #16060f;
+    --on-project-amber: #16060f;
+    --on-project-violet: #16060f;
+    --board-dark: #0c2836;
+
+    --risk-low: #123a2a;
+    --risk-low-fg: #86efac;
+    --risk-medium: #3a2c0e;
+    --risk-medium-fg: #fcd34d;
+    --risk-high: #442410;
+    --risk-high-fg: #fdba74;
+    --risk-critical: #4a1818;
+    --risk-critical-fg: #fca5a5;
+    --gantt-track: #1f3d6e;
+    --gantt-phase-track: #3b2f39;
+    --chart-6: #22b8d8;
+    --chart-7: #84b33a;
+    --chart-8: #f0763a;
+    --chart-9: #94a3b8;
+    --chart-10: #d6a043;
+  }
+}
+
+@theme inline {
+  --color-brand-magenta: var(--brand-magenta);
+  --color-brand-red: var(--brand-red);
+  --color-brand-orange: var(--brand-orange);
+  --color-logo-red: var(--logo-red);
+  --color-logo-orange: var(--logo-orange);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-on-primary: var(--on-primary);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-highlight: var(--highlight);
+  --color-ink: var(--ink);
+  --color-project-magenta: var(--project-magenta);
+  --color-project-blue: var(--project-blue);
+  --color-project-teal: var(--project-teal);
+  --color-project-amber: var(--project-amber);
+  --color-project-violet: var(--project-violet);
+  --color-on-project-magenta: var(--on-project-magenta);
+  --color-on-project-blue: var(--on-project-blue);
+  --color-on-project-teal: var(--on-project-teal);
+  --color-on-project-amber: var(--on-project-amber);
+  --color-on-project-violet: var(--on-project-violet);
+  --color-board-dark: var(--board-dark);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+  --color-chart-8: var(--chart-8);
+  --color-chart-9: var(--chart-9);
+  --color-chart-10: var(--chart-10);
+  --color-risk-low: var(--risk-low);
+  --color-risk-low-fg: var(--risk-low-fg);
+  --color-risk-medium: var(--risk-medium);
+  --color-risk-medium-fg: var(--risk-medium-fg);
+  --color-risk-high: var(--risk-high);
+  --color-risk-high-fg: var(--risk-high-fg);
+  --color-risk-critical: var(--risk-critical);
+  --color-risk-critical-fg: var(--risk-critical-fg);
+  --color-gantt-track: var(--gantt-track);
+  --color-gantt-phase-track: var(--gantt-phase-track);
+
+  --font-sans: var(--font-nunito);
+
+  /* Kill every border-radius utility */
+  --radius-*: initial;
+}
+
+@utility bg-brand-gradient {
+  background-image: linear-gradient(
+    90deg,
+    var(--brand-magenta) 0%,
+    var(--brand-red) 50%,
+    var(--brand-orange) 100%
+  );
+}
+
+/* Login page background only (see SKILL.md): deepest navy (#01131F) with a faint warm glow in the bottom-right corner. */
+@utility bg-login {
+  background-color: var(--navy-deep);
+  background-image: radial-gradient(
+    ellipse 70% 60% at 100% 100%,
+    color-mix(in srgb, var(--logo-orange) 22%, transparent) 0%,
+    color-mix(in srgb, var(--logo-red) 8%, transparent) 45%,
+    transparent 75%
+  );
+}
+
+* {
+  border-radius: 0 !important;
+}
+
+/* Print / "Save as PDF" only the element marked .print-area (e.g. the CEO report). */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+  .print-area {
+    position: absolute;
+    inset: 0 0 auto 0;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), sans-serif;
+}
+
+/* Animated Babaylan logo: the fill rises from the baseline, holds, then resets (see the Logo component).
+   --logo-rise is the letter height in the logo's own units. */
+.logo-rise {
+  animation: logo-rise 4s cubic-bezier(0.5, 0, 0.3, 1) infinite;
+}
+@keyframes logo-rise {
+  0%,
+  10% {
+    transform: translateY(calc(var(--logo-rise) * 1px));
+  }
+  60%,
+  90% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(var(--logo-rise) * 1px));
+  }
+}
+/* Without motion, rest at the signature two-thirds fill. */
+@media (prefers-reduced-motion: reduce) {
+  .logo-rise {
+    animation: none;
+    transform: translateY(calc(var(--logo-rise) * 0.33px));
+  }
+}
